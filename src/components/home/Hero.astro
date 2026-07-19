@@ -1,0 +1,24 @@
+---
+import TopologyRig from '@/components/TopologyRig.astro';
+---
+
+<section class="hero" aria-labelledby="hero-title" data-hero>
+  <div class="hero__stage" data-hero-stage>
+    <div class="hero__content shell">
+      <h1 id="hero-title" data-hero-reveal>Operations that leave a trail.</h1>
+      <p data-hero-reveal>
+        AcornOps is a self-hosted operations platform for Kubernetes clusters and Linux VMs.
+        Ask what’s wrong, inspect the evidence, and keep a durable record of every investigation.
+      </p>
+      <div class="hero__actions" data-hero-reveal>
+        <a class="button button--primary" href="https://console.demo.acornops.dev/" data-brand-contrast-exception="activation" data-track-cta-location="hero" data-track-cta-destination="demo">
+          Try the demo <span aria-hidden="true">↗</span>
+        </a>
+        <a class="button button--secondary" href="https://docs.acornops.dev/" data-track-cta-location="hero" data-track-cta-destination="docs">
+          Read the docs <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+    <TopologyRig />
+  </div>
+</section>

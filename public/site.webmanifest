@@ -1,0 +1,16 @@
+{
+  "name": "AcornOps",
+  "short_name": "AcornOps",
+  "description": "Self-hosted operations for Kubernetes clusters and Linux VMs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f1e5",
+  "theme_color": "#584738",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

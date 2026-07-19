@@ -1,0 +1,42 @@
+{
+  "name": "acornops-website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "assets:generate": "node scripts/generate-static-assets.mjs",
+    "prebuild": "npm run assets:generate",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:update": "playwright test --update-snapshots",
+    "links:check": "node scripts/check-links.mjs",
+    "bundle:check": "node scripts/check-bundle-budget.mjs",
+    "performance:test": "node scripts/run-lighthouse.mjs",
+    "validate": "npm run check && npm run test && npm run build && npm run links:check && npm run bundle:check && npm run test:e2e && npm run performance:test"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.2.1",
+    "@fontsource-variable/outfit": "^5.2.8",
+    "astro": "^4.16.18",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.51.1",
+    "chrome-launcher": "^1.0.0",
+    "lighthouse": "11.7.1",
+    "sharp": "^0.33.5",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=18.17.1"
+  }
+}

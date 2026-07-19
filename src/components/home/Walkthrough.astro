@@ -1,0 +1,101 @@
+---
+const steps = [
+  {
+    screen: 'workspace_overview',
+    slug: 'workspace-overview',
+    marker: '01',
+    label: 'Detect',
+    title: 'See the signal before the noise.',
+    body: 'The workspace surfaces the critical payments worker first while the neighbouring Linux VM stays healthy. One view, ordered by what needs attention.',
+    alt: 'AcornOps workspace overview showing a critical payments worker issue across a Kubernetes cluster and a healthy Linux VM.'
+  },
+  {
+    screen: 'assistant_answer',
+    slug: 'assistant-answer',
+    marker: '02',
+    label: 'Investigate',
+    title: 'Ask in the context of the system.',
+    body: 'Ask why the worker is restarting. AcornOps inspects the runtime, finds CrashLoopBackOff after four restarts, and points to the failed container startup.',
+    alt: 'AcornOps cluster assistant answering why the payments worker is restarting, with the investigation result and supporting runtime context.'
+  },
+  {
+    screen: 'run_trace',
+    slug: 'run-trace',
+    marker: '03',
+    label: 'Verify',
+    title: 'Read the work, not just the answer.',
+    body: 'Open the run trace to inspect every step, tool call, and result. The evidence remains available after the incident is resolved.',
+    alt: 'AcornOps cluster assistant showing the payments restart investigation with its completed run details expanded.'
+  }
+] as const;
+---
+
+<section class="walkthrough" id="product" aria-labelledby="walkthrough-title" data-walkthrough>
+  <div class="walkthrough__stage" data-walkthrough-stage>
+    <div class="walkthrough__inner shell">
+      <div class="walkthrough__narrative">
+        <header class="walkthrough__heading">
+          <h2 id="walkthrough-title">One incident.<br />The whole trail.</h2>
+          <p>Follow a real payments-worker crash loop from the first signal to a completed, inspectable investigation.</p>
+        </header>
+
+        <ol class="walkthrough__rail" aria-label="Investigation steps">
+          {steps.map((step, index) => (
+            <li>
+              <button
+                type="button"
+                id={`proof-step-${index + 1}`}
+                class="walkthrough__rail-step"
+                data-walkthrough-step
+                data-active={index === 0 ? 'true' : 'false'}
+                aria-controls={`proof-panel-${index + 1}`}
+                aria-current={index === 0 ? 'step' : undefined}
+              >
+                <span class="walkthrough__rail-num">{step.marker}</span>
+                <span class="walkthrough__rail-copy">
+                  <strong>{step.label}</strong>
+                  <span>{step.title}</span>
+                  <small>{step.body}</small>
+                </span>
+              </button>
+            </li>
+          ))}
+          <li class="walkthrough__trace" data-walkthrough-trace aria-hidden="true"></li>
+        </ol>
+      </div>
+
+      <div class="walkthrough__screens" data-walkthrough-frame>
+        {steps.map((step, index) => (
+          <figure
+            id={`proof-panel-${index + 1}`}
+            class="walkthrough-screen"
+            data-walkthrough-screen
+            data-proof-screen={step.screen}
+            data-active={index === 0 ? 'true' : 'false'}
+            aria-labelledby={`proof-step-${index + 1}`}
+          >
+            <figcaption class="walkthrough-screen__caption">
+              <span>{step.marker} · {step.label}</span>
+              <strong>{step.title}</strong>
+              <p>{step.body}</p>
+            </figcaption>
+            <picture
+              class="walkthrough-screen__capture"
+              data-proof-capture
+            >
+              <img
+                src={`/images/proof/${step.slug}.webp`}
+                width="1280"
+                height="889"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : 'auto'}
+                decoding="async"
+                alt={step.alt}
+              />
+            </picture>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

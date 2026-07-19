@@ -1,0 +1,82 @@
+---
+import Logo from '@/components/Logo.astro';
+import '@/styles/global.css';
+import outfitLatinUrl from '@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+  pathname?: string;
+}
+
+const { title, description, pathname = Astro.url.pathname } = Astro.props;
+const canonical = new URL(pathname, Astro.site);
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+const plausibleSrc = import.meta.env.PUBLIC_PLAUSIBLE_SRC || 'https://plausible.io/js/script.js';
+const plausibleEnabled = import.meta.env.PROD && Boolean(plausibleDomain);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#faf9f7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AcornOps" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href={outfitLatinUrl} as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    {plausibleEnabled && <script is:inline defer data-domain={plausibleDomain} src={plausibleSrc}></script>}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header" data-site-header data-scrolled="false">
+      <nav class="site-nav shell" aria-label="Primary navigation">
+        <a class="site-nav__brand" href="/" aria-label="AcornOps home" data-track-navigation="home">
+          <Logo />
+        </a>
+        <div class="site-nav__links">
+          <a class="site-nav__docs" href="https://docs.acornops.dev/" data-track-navigation="docs">Docs</a>
+          <a class="site-nav__github" href="https://github.com/acornops" data-track-navigation="github">GitHub</a>
+          <a class="site-nav__console" href="https://console.demo.acornops.dev/" data-brand-contrast-exception="activation" data-track-cta-location="navigation" data-track-cta-destination="demo">
+            Live demo <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner shell">
+        <div class="site-footer__brandblock">
+          <a class="site-footer__brand" href="/" aria-label="AcornOps home" data-track-navigation="home"><Logo inverse /></a>
+          <p>Collecting acorns for everything ops.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="https://docs.acornops.dev/" data-track-navigation="docs">Docs</a>
+          <a href="https://github.com/acornops" data-track-navigation="github">GitHub</a>
+          <a href="/privacy/" data-track-navigation="privacy">Privacy</a>
+          <a href="https://console.demo.acornops.dev/" data-track-navigation="console">Console</a>
+        </nav>
+        <small>© {new Date().getFullYear()} AcornOps. Open source under the MIT License.</small>
+      </div>
+    </footer>
+  </body>
+</html>

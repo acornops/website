@@ -1,0 +1,157 @@
+---
+import { ACORN_PROGRESS, SQUIRREL_START, GLOBE_R, arcPoint, chaseGuidePath } from '@/lib/hero-geometry';
+
+// Acorns rest on the chase arc; the squirrel starts on the globe rim just below
+// it. Every coordinate comes from the shared geometry so the static (no-JS)
+// layout matches what motion.ts renders at scroll progress 0.
+const acorns = ACORN_PROGRESS.map((t) => arcPoint(t));
+const squirrel = arcPoint(SQUIRREL_START, GLOBE_R);
+const chasePath = chaseGuidePath();
+---
+
+<div class="hero-globe-scene" data-hero-globe aria-hidden="true">
+  <svg class="hero-globe-rig" viewBox="0 -70 1000 1070" role="presentation">
+    <defs>
+      <clipPath id="hero-globe-clip">
+        <circle cx="500" cy="500" r="460" />
+      </clipPath>
+      <linearGradient id="hero-console-squirrel-body" x1="0" y1="0" x2="0.25" y2="1">
+        <stop offset="0" stop-color="var(--hero-fur-bright)" />
+        <stop offset="1" stop-color="var(--hero-fur-strong)" />
+      </linearGradient>
+      <linearGradient id="hero-console-squirrel-tail" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="var(--hero-fur-bright)" />
+        <stop offset="1" stop-color="var(--hero-fur-deep)" />
+      </linearGradient>
+      <symbol id="hero-console-acorn" viewBox="0 0 60 82">
+        <path d="M9 34Q9 21 30 21Q51 21 51 34Q51 58 30 76Q9 58 9 34Z" fill="var(--hero-acorn-body)" />
+        <path d="M30 21Q51 21 51 34Q51 58 30 76Q41 52 41 35Q41 23 30 21Z" fill="var(--hero-acorn-shade)" opacity="0.55" />
+        <ellipse cx="21" cy="42" rx="5" ry="8.5" fill="var(--hero-belly)" opacity="0.6" />
+        <path d="M5 30Q5 9 30 7Q55 9 55 30Q55 36 30 36Q5 36 5 30Z" fill="var(--hero-acorn-cap)" />
+        <path d="M14 13L20 34M24 11L31 35M35 11L42 34M45 13L50 32" stroke="var(--hero-acorn-line)" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round" />
+        <path d="M8 20H52M9 27H51" stroke="var(--hero-acorn-line)" stroke-width="1.3" opacity="0.38" fill="none" stroke-linecap="round" />
+        <rect x="27" y="0" width="6" height="10" rx="3" fill="var(--hero-acorn-cap)" />
+      </symbol>
+    </defs>
+
+    <path
+      class="hero-chase-guide"
+      data-hero-chase-path
+      d={chasePath}
+    />
+
+    <circle class="hero-globe__base" cx="500" cy="500" r="460" />
+    <g clip-path="url(#hero-globe-clip)">
+      <g class="hero-globe__bands" data-hero-globe-layer="bands">
+        <path d="M-80 126C129 72 301 104 482 183C680 270 855 280 1080 184V352C860 430 669 419 481 336C304 259 130 228-80 283Z" />
+        <path d="M-80 348C135 286 319 319 500 397C690 479 864 487 1080 393V576C865 655 679 648 496 571C315 495 133 464-80 523Z" />
+        <path d="M-80 570C144 508 330 542 518 620C705 697 875 708 1080 620V818C869 881 684 866 503 795C318 722 135 690-80 747Z" />
+        <path d="M-80 800C151 744 335 778 517 846C699 914 871 925 1080 856V1080H-80Z" />
+      </g>
+
+      <path class="hero-globe__light-plane" d="M70 354C141 177 297 57 500 40C389 112 307 212 265 342C190 327 123 331 70 354Z" />
+
+      <g class="hero-globe__grid" data-hero-globe-layer="grid">
+        <path d="M60 372C280 300 720 300 940 372" />
+        <path d="M46 520C276 452 724 452 954 520" />
+        <path d="M60 668C280 604 720 604 940 668" />
+        <path d="M120 800C300 754 700 754 880 800" />
+      </g>
+
+      <g class="hero-globe__routes" data-hero-globe-layer="routes">
+        <path d="M300 356Q404 322 512 316" />
+        <path d="M512 316Q620 322 704 388" />
+        <path d="M300 356Q322 452 392 520" />
+        <path d="M512 316Q566 430 612 548" />
+        <path d="M392 520Q506 566 612 548" />
+        <path d="M704 388Q712 486 612 548" />
+        <g class="hero-globe__node" transform="translate(300 356)"><circle r="8" /><circle r="3.4" /></g>
+        <g class="hero-globe__node" transform="translate(512 316)"><circle r="8" /><circle r="3.4" /></g>
+        <g class="hero-globe__node" transform="translate(704 388)"><circle r="8" /><circle r="3.4" /></g>
+        <g class="hero-globe__node" transform="translate(392 520)"><circle r="8" /><circle r="3.4" /></g>
+        <g class="hero-globe__node" transform="translate(612 548)"><circle r="8" /><circle r="3.4" /></g>
+      </g>
+
+    </g>
+    <circle class="hero-globe__edge" cx="500" cy="500" r="460" />
+
+    {acorns.map((acorn, index) => (
+      <g
+        class="hero-acorn"
+        data-hero-acorn
+        data-acorn-index={index}
+        data-collected="false"
+        data-collection-state="waiting"
+        transform={`translate(${acorn.x.toFixed(2)} ${acorn.y.toFixed(2)}) rotate(${acorn.rotation.toFixed(2)})`}
+      >
+        <g data-hero-acorn-squash>
+          <g class="hero-acorn__hover" data-hero-acorn-hover>
+            <use href="#hero-console-acorn" width="36" height="49.2" x="-18" y="-31.2" />
+          </g>
+        </g>
+      </g>
+    ))}
+
+    {acorns.map((acorn, index) => (
+      <ellipse
+        class="hero-collection-ripple"
+        data-hero-ripple
+        data-ripple-index={index}
+        cx={acorn.x.toFixed(2)}
+        cy={(acorn.y + 36).toFixed(2)}
+        rx="28"
+        ry="8"
+      />
+    ))}
+
+    <g class="hero-squirrel" data-hero-squirrel transform={`translate(${squirrel.x.toFixed(2)} ${squirrel.y.toFixed(2)}) rotate(${squirrel.rotation.toFixed(2)})`}>
+      <g data-squirrel-body>
+        <g class="hero-squirrel__art" transform="translate(-82 -76) scale(0.46)">
+          <g class="hero-squirrel__tail" data-squirrel-tail data-transform-origin="55% 88%">
+            <path d="M74 124C44 116 30 90 42 62" fill="none" stroke="url(#hero-console-squirrel-tail)" stroke-width="38" stroke-linecap="round" />
+            <path d="M42 62C52 34 84 26 105 43" fill="none" stroke="url(#hero-console-squirrel-tail)" stroke-width="26" stroke-linecap="round" />
+            <path d="M68 112C50 104 42 90 46 72" fill="none" stroke="var(--hero-belly)" stroke-width="12" stroke-linecap="round" opacity="0.45" />
+          </g>
+
+          <g data-squirrel-limb="hind" data-transform-origin="91% 3%">
+            <path d="M90 130C80 148 68 160 54 168C45 172 46 180 56 178C72 174 88 160 98 144Z" fill="var(--hero-fur-deep)" />
+            <ellipse cx="56" cy="174" rx="11" ry="5" fill="var(--hero-fur-deep)" />
+          </g>
+          <g data-squirrel-limb="front" data-transform-origin="10% 5%">
+            <path d="M176 122C188 138 202 150 214 156C222 160 220 168 210 165C196 160 182 148 172 134Z" fill="var(--hero-fur-strong)" />
+            <ellipse cx="213" cy="160" rx="8" ry="6" fill="var(--hero-fur-strong)" />
+          </g>
+
+          <path d="M196 116C192 88 160 70 124 76C90 82 66 100 68 124C70 148 94 160 126 160C158 160 184 146 196 116Z" fill="url(#hero-console-squirrel-body)" />
+          <ellipse cx="94" cy="130" rx="24" ry="21" fill="var(--hero-fur-strong)" opacity="0.45" />
+          <ellipse cx="138" cy="144" rx="38" ry="14" fill="var(--hero-belly)" />
+
+          <g data-squirrel-limb="hind" data-transform-origin="88% 4%">
+            <path d="M98 134C88 152 76 164 62 172C52 177 53 185 64 182C82 177 98 164 108 150Z" fill="var(--hero-fur-strong)" />
+            <ellipse cx="64" cy="179" rx="13" ry="5.5" fill="var(--hero-fur)" />
+            <path d="M55 180H60M64 182H68M72 181H76" stroke="var(--hero-fur-strong)" stroke-width="2" stroke-linecap="round" />
+          </g>
+
+          <circle cx="214" cy="88" r="28" fill="url(#hero-console-squirrel-body)" />
+          <path d="M196 64Q194 42 208 40Q214 56 205 66Z" fill="var(--hero-fur-strong)" />
+          <ellipse cx="203" cy="52" rx="4" ry="6" fill="var(--hero-fur-bright)" />
+          <path d="M218 60Q224 36 238 40Q240 58 228 66Z" fill="var(--hero-fur)" />
+          <ellipse cx="230" cy="50" rx="4.5" ry="6.5" fill="var(--hero-belly)" />
+          <ellipse cx="232" cy="102" rx="17" ry="14" fill="var(--hero-belly)" />
+          <ellipse cx="224" cy="105" rx="8" ry="5" fill="var(--hero-fur-bright)" opacity="0.45" />
+          <circle cx="218" cy="84" r="7.5" fill="var(--hero-ink)" />
+          <circle cx="220.5" cy="81" r="2.8" fill="var(--hero-belly)" />
+          <circle cx="216" cy="87" r="1.4" fill="var(--hero-belly)" opacity="0.7" />
+          <ellipse cx="247" cy="97" rx="5" ry="4.2" fill="var(--hero-ink)" />
+          <path d="M247 102Q243 108 236 106" fill="none" stroke="var(--hero-smile)" stroke-width="2" stroke-linecap="round" />
+
+          <g data-squirrel-limb="front" data-transform-origin="8% 6%">
+            <path d="M182 118C196 134 212 148 226 155C236 160 234 170 222 167C205 162 188 148 178 132Z" fill="var(--hero-fur)" />
+            <ellipse cx="225" cy="161" rx="9" ry="6.5" fill="var(--hero-belly)" />
+            <path d="M220 164Q226 166 232 165M221 168Q227 169 232 168" fill="none" stroke="var(--hero-fur-strong)" stroke-width="2" stroke-linecap="round" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>

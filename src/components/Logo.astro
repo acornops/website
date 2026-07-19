@@ -1,0 +1,12 @@
+---
+interface Props {
+  inverse?: boolean;
+}
+
+const { inverse = false } = Astro.props;
+---
+
+<span class:list={["wordmark", { "wordmark--inverse": inverse }]} aria-hidden="true" data-brand-contrast-exception="wordmark">
+  <img src="/favicon.svg" width="35" height="35" alt="" />
+  <span><span class="wordmark__base">acorn</span><span class="wordmark__signal">ops</span></span>
+</span>

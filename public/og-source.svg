@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f1e5"/>
+  <path d="M0 565C210 485 357 592 560 474C731 375 855 291 1200 339V630H0Z" fill="#584738"/>
+  <path d="M751 89C908 65 1006 139 1007 245C1008 329 941 374 861 350C775 324 716 242 751 89Z" fill="none" stroke="#ff703b" stroke-width="7" stroke-linecap="round" stroke-dasharray="3 19"/>
+  <circle cx="755" cy="90" r="13" fill="#584738"/>
+  <circle cx="861" cy="350" r="18" fill="#ff703b" stroke="#584738" stroke-width="7"/>
+  <g transform="translate(902 164) rotate(8)">
+    <path d="M0 80C-27 23 7-34 64-20C109-9 114 43 87 72C70 89 42 94 0 80Z" fill="#8e6d50"/>
+    <ellipse cx="38" cy="85" rx="54" ry="35" fill="#584738"/>
+    <circle cx="80" cy="64" r="25" fill="#584738"/>
+    <path d="M73 44L83 21L95 48Z" fill="#584738"/>
+    <circle cx="88" cy="60" r="3.5" fill="#f7f1e5"/>
+  </g>
+  <g fill="#3b3028" font-family="Outfit, Arial, sans-serif">
+    <text x="72" y="104" font-size="30" font-weight="700">AcornOps</text>
+    <text x="72" y="235" font-size="72" font-weight="650">Follow the signal.</text>
+    <text x="72" y="319" font-size="72" font-weight="650">Resolve with context.</text>
+    <text x="72" y="399" font-size="26" font-weight="450">Self-hosted operations for Kubernetes and Linux VMs.</text>
+  </g>
+</svg>

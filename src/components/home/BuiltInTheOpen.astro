@@ -1,0 +1,44 @@
+---
+const repositories = [
+  { name: 'management-console', language: 'TypeScript' },
+  { name: 'control-plane', language: 'TypeScript' },
+  { name: 'agentk', language: 'TypeScript' },
+  { name: 'execution-engine', language: 'Python' }
+] as const;
+---
+
+<section class="open-band" aria-labelledby="open-title">
+  <div class="open-band__inner shell">
+    <div class="open-band__text">
+      <h2 id="open-title">Follow the trail into the source.</h2>
+      <p>
+        The console, control plane, agents, and execution engine are public. Inspect the boundary,
+        verify the behavior, or run the stack yourself.
+      </p>
+    </div>
+    <div class="source-index" aria-label="Selected public AcornOps repositories">
+      <div class="source-index__header">
+        <span>Public source</span>
+        <a href="https://github.com/acornops" data-track-navigation="github">
+          github.com/acornops <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <ul>
+        {repositories.map((repository) => (
+          <li>
+            <a href={`https://github.com/acornops/${repository.name}`}>
+              <span>{repository.name}</span>
+              <small>{repository.language}</small>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="source-index__footer">
+        <span><i aria-hidden="true"></i> MIT licensed</span>
+        <a href="https://docs.acornops.dev/" data-track-navigation="docs">
+          Architecture and operating docs <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

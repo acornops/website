@@ -1,0 +1,56 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy | AcornOps"
+  description="How the AcornOps website uses privacy-friendly analytics and which event categories it measures."
+  pathname="/privacy/"
+>
+  <article class="legal shell">
+    <header class="legal__header">
+      <p class="legal__kicker">Privacy note</p>
+      <h1>Useful signals, minimal data.</h1>
+      <p>Last updated 17 July 2026</p>
+    </header>
+
+    <div class="legal__body">
+      <section aria-labelledby="privacy-overview">
+        <h2 id="privacy-overview">Overview</h2>
+        <p>AcornOps uses Plausible Analytics on the production marketing website to understand which pages and product paths are useful. The website does not use analytics cookies, advertising trackers, or session replay.</p>
+      </section>
+
+      <section aria-labelledby="privacy-events">
+        <h2 id="privacy-events">What we measure</h2>
+        <p>We may record aggregate page views and four limited event categories:</p>
+        <ul>
+          <li>Clicks on demo and documentation calls to action, categorized by page location and destination.</li>
+          <li>Navigation clicks, categorized by destination.</li>
+          <li>Completion of the product walkthrough, categorized by target type.</li>
+          <li>Views of the workspace overview, assistant answer, and expanded run-trace states.</li>
+        </ul>
+        <p>The website adapter accepts only predefined property values. It does not send free-form text, full URLs, email addresses, user IDs, target identifiers, or other personal data in custom events.</p>
+      </section>
+
+      <section aria-labelledby="privacy-cookies">
+        <h2 id="privacy-cookies">Cookies and identifiers</h2>
+        <p>This site does not set an analytics cookie or use a persistent analytics identifier. A cookie banner is therefore not shown for the analytics configuration described here.</p>
+      </section>
+
+      <section aria-labelledby="privacy-links">
+        <h2 id="privacy-links">External services</h2>
+        <p>Links to the demo console, documentation, and GitHub open services with their own privacy practices. Following one of those links leaves this marketing website.</p>
+      </section>
+
+      <section aria-labelledby="privacy-contact">
+        <h2 id="privacy-contact">Questions</h2>
+        <p>For privacy questions or requests, open an issue in the <a href="https://github.com/acornops" data-track-navigation="github">AcornOps GitHub organization</a>. Do not include secrets, credentials, or sensitive personal information in a public issue.</p>
+      </section>
+    </div>
+  </article>
+
+  <script>
+    import { initAnalytics } from '@/scripts/analytics';
+    initAnalytics();
+  </script>
+</BaseLayout>
