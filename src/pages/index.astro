@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/home/Hero.astro';
 import Walkthrough from '@/components/home/Walkthrough.astro';
+import Automation from '@/components/home/Automation.astro';
 import SystemBoundary from '@/components/home/SystemBoundary.astro';
 import BuiltInTheOpen from '@/components/home/BuiltInTheOpen.astro';
 import FinalCta from '@/components/home/FinalCta.astro';
@@ -9,10 +10,11 @@ import FinalCta from '@/components/home/FinalCta.astro';
 
 <BaseLayout
   title="AcornOps | Self-hosted operations platform"
-  description="A self-hosted operations platform for triaging Kubernetes and Linux VM incidents, with every action and result recorded."
+  description="A self-hosted operations platform for investigating incidents and running governed Workflows with Agents, with every action and result recorded."
 >
   <Hero />
   <Walkthrough />
+  <Automation />
   <SystemBoundary />
   <BuiltInTheOpen />
   <FinalCta />

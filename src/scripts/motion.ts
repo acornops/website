@@ -110,6 +110,12 @@ function initHeroChase(): boolean {
   const globeLayers = hero
     ? [...hero.querySelectorAll<SVGGElement>('[data-hero-globe-layer]')]
     : [];
+  const storyBeats = hero
+    ? [...hero.querySelectorAll<HTMLElement>('[data-hero-story-beat]')]
+    : [];
+  const storyTitles = hero
+    ? [...hero.querySelectorAll<HTMLElement>('[data-hero-story-title]')]
+    : [];
 
   if (
     !hero ||
@@ -122,6 +128,8 @@ function initHeroChase(): boolean {
     squirrelLegs.length < 2 ||
     acorns.length !== ACORN_PROGRESS.length ||
     ripples.length !== ACORN_PROGRESS.length ||
+    storyBeats.length !== ACORN_PROGRESS.length + 1 ||
+    storyTitles.length !== storyBeats.length ||
     !canEnhanceHero()
   ) {
     return false;
@@ -143,6 +151,26 @@ function initHeroChase(): boolean {
     acorn.dataset.collectionProgress = collectionProgress[index]?.toFixed(4);
   });
 
+  let activeStoryIndex = -1;
+
+  function activateStory(index: number): void {
+    if (activeStoryIndex === index) return;
+    activeStoryIndex = index;
+
+    storyBeats.forEach((beat, beatIndex) => {
+      const active = beatIndex === index;
+      beat.dataset.active = String(active);
+      if (active) beat.removeAttribute('aria-hidden');
+      else beat.setAttribute('aria-hidden', 'true');
+    });
+    storyTitles.forEach((title, titleIndex) => {
+      const active = titleIndex === index;
+      title.dataset.active = String(active);
+      if (active) title.removeAttribute('aria-hidden');
+      else title.setAttribute('aria-hidden', 'true');
+    });
+  }
+
   function clearHoveredAcorn(): void {
     acorns.forEach((acorn) => {
       delete acorn.dataset.hovered;
@@ -152,6 +180,9 @@ function initHeroChase(): boolean {
   function render(progressValue: number): void {
     const progress = clamp(progressValue);
     heroElement.dataset.heroProgress = progress.toFixed(4);
+    const collectedCount = collectionProgress.filter((threshold) => progress >= threshold).length;
+    heroElement.dataset.heroStoryStep = String(collectedCount);
+    activateStory(collectedCount);
 
     globeLayers.forEach((layer) => {
       const name = layer.dataset.heroGlobeLayer;

@@ -6,11 +6,11 @@ brand
 
 ## Users
 
-The primary audience is infrastructure engineers, platform engineers, SREs, and technical leaders evaluating an operations platform for Kubernetes clusters and Linux VMs. They arrive with healthy skepticism, often while comparing architecture, security boundaries, and incident workflows. They need to understand how AcornOps works, see authentic product evidence, and reach a live demo or documentation without marketing friction.
+The primary audience is infrastructure engineers, platform engineers, SREs, and technical leaders evaluating an operations platform for incident investigation and repeatable operational work. Kubernetes clusters and Linux VMs are important targets, while Workflows and Agents form a second core product pillar for coordinating tools, skills, MCP connections, schedules, approvals, and durable run evidence. Visitors arrive with healthy skepticism, often while comparing architecture, security boundaries, and operational workflows. They need to understand how AcornOps works, see authentic product evidence, and reach a live demo or documentation without marketing friction.
 
 ## Product Purpose
 
-This site explains AcornOps as a self-hosted operations platform that follows an operational signal through investigation, governed action, and inspectable evidence. Its primary conversion is the public demo. Documentation and GitHub provide secondary validation paths. Success means a technically informed visitor can understand the system boundary, trust the product claims, and choose a next step without needing JavaScript.
+This site explains AcornOps as a self-hosted operations platform with two core loops: follow an operational signal through investigation and inspectable evidence, then turn operational intent into governed, repeatable runs through Workflows and Agents. Its primary conversion is the public demo. Documentation and GitHub provide secondary validation paths. Success means a technically informed visitor can understand the system boundary, trust the product claims, and choose a next step without needing JavaScript.
 
 ## Brand Personality
 

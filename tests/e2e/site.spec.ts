@@ -77,8 +77,9 @@ test('primary paths and all product states work without JavaScript', async ({ br
   const page = await context.newPage();
   await page.goto('/');
 
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Operations that leave a trail.');
-  await expect(page.getByText(/self-hosted operations platform for Kubernetes clusters and Linux VMs/i)).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveAccessibleName('Turn incidents into evidence.');
+  await expect(page.getByText(/self-hosted AcornOps investigates incidents/i)).toBeVisible();
+  await expect(page.locator('[data-hero-story-beat]')).toHaveCount(6);
   await expect(page.getByRole('link', { name: /try the demo/i }).first()).toHaveAttribute('href', 'https://console.demo.acornops.dev/');
   await expect(page.getByRole('link', { name: /read the docs/i }).first()).toHaveAttribute('href', 'https://docs.acornops.dev/');
   await expect(page.locator('[data-hero]')).not.toHaveAttribute('data-enhanced', 'true');
@@ -89,6 +90,7 @@ test('primary paths and all product states work without JavaScript', async ({ br
   await expect(page.locator('[data-proof-screen="assistant_answer"]')).toContainText('Ask in the context of the system.');
   await expect(page.locator('[data-proof-screen="run_trace"]')).toContainText('Read the work, not just the answer.');
   await expect(page.locator('[data-walkthrough]')).not.toHaveAttribute('data-enhanced', 'true');
+  await expect(page.getByRole('heading', { name: /build the operation once/i })).toBeVisible();
   await context.close();
 });
 
@@ -259,6 +261,10 @@ test('hero chase maps direct and reverse scroll to five deterministic collection
   for (const [progress, count] of [[0.1, 1], [0.26, 2], [0.43, 3], [0.6, 4], [0.78, 5]] as const) {
     await scrollHeroTo(page, progress);
     await expect(page.locator('[data-hero-acorn][data-collected="true"]')).toHaveCount(count);
+    await expect(hero).toHaveAttribute('data-hero-story-step', String(count));
+    await expect(page.locator('[data-hero-story-beat][data-active="true"]')).toHaveCount(1);
+    await expect(page.locator('[data-hero-story-beat]').nth(count)).not.toHaveAttribute('aria-hidden', 'true');
+    await expect(page.locator('[data-hero-story-title]').nth(count)).not.toHaveAttribute('aria-hidden', 'true');
   }
 
   await scrollHeroTo(page, 1);
@@ -268,6 +274,8 @@ test('hero chase maps direct and reverse scroll to five deterministic collection
   await expect(page.locator('[data-hero-acorn][data-collected="true"]')).toHaveCount(3);
   await scrollHeroTo(page, 0);
   await expect(page.locator('[data-hero-acorn][data-collected="true"]')).toHaveCount(0);
+  await expect(hero).toHaveAttribute('data-hero-story-step', '0');
+  await expect(page.locator('[data-hero-story-beat]').first()).not.toHaveAttribute('aria-hidden', 'true');
   await expect(acorns.filter({ has: page.locator('[data-hero-acorn-hover]') }).first()).toHaveAttribute('data-collection-state', 'waiting');
   await context.close();
 });

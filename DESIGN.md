@@ -49,13 +49,14 @@ Section titles are deliberately smaller than the hero so the page keeps a clear 
 
 ## Homepage Structure
 
-The homepage follows one incident from signal to record across five chapters:
+The homepage establishes two core product loops across six chapters:
 
-1. A centered, scroll-responsive hero composed onto the globe chase scene: one headline, one supporting paragraph, and two actions. The squirrel and acorns provide the brand motion metaphor without extra labels or progress controls.
+1. A centered, scroll-responsive hero composed onto the globe chase scene: a six-beat headline and supporting incident story with two persistent actions. The static opening beat contains the whole arc for mobile, reduced-motion, data-saving, and no-JavaScript visitors. On enhanced desktops, each collected acorn advances one reversible beat: promise, workload failure, alert, human-selected triage, capability discovery across MCP servers/skills/tools, and root cause with inspectable evidence. The squirrel and acorns carry the progression without extra labels or progress controls.
 2. A product walkthrough of one real incident, the payments worker crash-loop, shown as a sticky narrative: a step's number, title, and story beside the console capture for that state (workspace overview, assistant answer, expanded run trace), with a three-step progress rail. Captures are non-interactive product evidence with deterministic fixture provenance. On mobile, no-JS, and reduced motion the steps stack in normal flow.
-3. A "Runs inside your boundary" chapter: a ruled ledger stating the system boundary in plain text (self-hosted, Kubernetes clusters, Linux VMs, governed action), followed by a four-stage approval path that separates investigation from execution.
-4. A compact "Built in the open" band pointing to the source and docs.
-5. A final call to action flowing directly into the footer.
+3. A "Workflows and Agents" chapter establishes the second core product loop in a ruled sequence: reusable intent, direct or coordinated Agents, governed execution, and durable evidence. It stays code-native until deterministic workflow and Agent captures are available.
+4. A "Runs inside your boundary" chapter states the system boundary in plain text and separates investigation from execution.
+5. A compact "Built in the open" band pointing to the source and docs.
+6. A final call to action flowing directly into the footer.
 
 New sections must earn their place against the one-incident story and stay purely typographic where they are not showing the console. Do not add trust strips, invented metrics, testimonials, feature-card grids, abstract incident UI, or duplicated proof grids. The homepage squirrel is reserved for the purposeful globe chase in the hero. The console captures render at their native `1280 / 889` ratio. Use `width: auto` or `width: 100%` with `height: auto`, and never force both dimensions. All product imagery must be deterministic fixture captures with recorded provenance (`public/images/proof/README.md`); no mockups or hand-drawn UI.
 
@@ -68,7 +69,8 @@ Motion is quiet, functional, and progressively enhanced.
 - Detect, Investigate, and Verify crossfade in one overflow-hidden console frame. Captures remain at native scale with no transform so dense console text stays sharp.
 - The narrative rail, orange progress trace, and subtle frame-shadow shift support the scene changes. There is no looping, bounce, blur, or layout-property animation.
 - The hero enters once over 480 milliseconds with a short stagger.
-- The hero squirrel may move only as a direct, reversible expression of scroll progress. Do not loop decorative motion or hide content before JavaScript initializes.
+- The hero uses a CSS-sticky `100svh` stage across a `320svh` scroll range. Each acorn collection reversibly swaps both the headline and supporting story copy while the actions stay fixed.
+- The hero squirrel may move only as a direct, reversible expression of scroll progress. Do not loop decorative motion or hide the complete static summary before JavaScript initializes.
 
 ## Responsive and Fallback Behavior
 
