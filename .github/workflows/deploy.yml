@@ -21,6 +21,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Read published conference slides
+        uses: actions/checkout@v7
+        with:
+          ref: presentation-assets
+          path: .published-presentations
+          sparse-checkout: archive
+          persist-credentials: false
+
+      - name: Mount the archive at /presentation/
+        run: |
+          test -f .published-presentations/archive/index.html
+          test ! -e public/presentation
+          cp -R .published-presentations/archive public/presentation
+
       - name: Build and upload Astro site
         uses: withastro/action@v6
         with:
