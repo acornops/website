@@ -2,10 +2,6 @@
 
 The static marketing site for AcornOps, built with Astro, TypeScript, GSAP, and Lenis.
 
-## Conference presentations
-
-The Pages build serves the [conference archive](https://acornops.dev/presentation/) from this repository’s `presentation-assets` branch. That branch contains built slides and a record of their source revision. Conference URLs follow `/presentation/<conference-and-year>/`. The presentation project’s `npm run deploy` command publishes the archive and requests a new website deployment. Normal website deployments also include the latest published archive.
-
 ## Development
 
 ```sh
